@@ -16,205 +16,221 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table(name = "libro")
+@Table(name="libro")
+
 public class Libro {
+	
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_libro")
+	private int idLibro;
+	@Column(name="titulo")
+	private String titulo;
+	@Column(name="editorial")
+	private String editorial;
+	@Column(name="num_paginas")
+	private int numPaginas;
+	@Column(name="edicion")
+	private String edicion;
+	@Column(name="idioma")
+	private String idioma;
+	@Column(name="fecha_publicacion")
+	private Date fechaPublicacion;
+	@Column(name="descripcion")
+	private String descripcion;
+	@Column(name="tipo_pasta")
+	private String tipoPasta;
+	@Column(name="ISBN")
+	private String ISBN;
+	@Column(name="num_ejemplares")
+	private String numEjemplares;
+	@Column(name="portada")
+	private String portada;
+	@Column(name="presentacion")
+	private String presentacion;
+	@Column(name="precio")
+	private Double precio;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_libro")
-    private int idLibro;
-    @Column(name = "titulo")
-    private String titulo;
-    @Column(name = "editorial")
-    private String editorial;
-    @Column(name = "num_paginas")
-    private int numPaginas;
-    @Column(name = "edicion")
-    private String edicion;
-    @Column(name = "idioma")
-    private String idioma;
-    @Column(name = "fecha_publicacion")
-    private Date fechaPublicacion;
-    @Column(name = "descripcion")
-    private String descripcion;
-    @Column(name = "tipo_pasta")
-    private String tipoPasta;
-    @Column(name = "ISBN")
-    private String ISBN;
-    @Column(name = "num_ejemplares")
-    private int numEjemplares;
-    @Column(name = "portada")
-    private String portada;
-    @Column(name = "presentacion")
-    private String presentacion;
-    @Column(name = "precio")
-    private double precio;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "id_categoria")
-    private Categoria categoria;
+	
+	@ManyToOne(cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH})
+	@JoinColumn(name="id_categoria")
+	private Categoria categoria;
+	
+	
+	@ManyToOne(cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH})
+	@JoinColumn(name="id_autor")
+	private Autor autor;
+	
+	public Libro (){}
+	
+	
+	
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "id_autor")
-    private Autor autor;
 
-    public Libro() {}
 
-    public Libro(int idLibro, String titulo, String editorial, int numPaginas, String edicion, String idioma,
-            Date fechaPublicacion, String descripcion, String tipoPasta, String ISBN, int numEjemplares,
-            String portada, String presentacion, double precio, Categoria categoria, Autor autor) {
-        this.idLibro = idLibro;
-        this.titulo = titulo;
-        this.editorial = editorial;
-        this.numPaginas = numPaginas;
-        this.edicion = edicion;
-        this.idioma = idioma;
-        this.fechaPublicacion = fechaPublicacion;
-        this.descripcion = descripcion;
-        this.tipoPasta = tipoPasta;
-        this.ISBN = ISBN;
-        this.numEjemplares = numEjemplares;
-        this.portada = portada;
-        this.presentacion = presentacion;
-        this.precio = precio;
-        this.categoria = categoria;
-        this.autor = autor;
-    }
+	public Libro(int idLibro, String titulo, String editorial, int numPaginas, String edicion, String idioma,
+			Date fechaPublicacion, String descripcion, String tipoPasta, String iSBN, String numEjemplares,
+			String portada, String presentacion, Double precio) {
+		this.idLibro = idLibro;
+		this.titulo = titulo;
+		this.editorial = editorial;
+		this.numPaginas = numPaginas;
+		this.edicion = edicion;
+		this.idioma = idioma;
+		this.fechaPublicacion = fechaPublicacion;
+		this.descripcion = descripcion;
+		this.tipoPasta = tipoPasta;
+		this.ISBN = iSBN;
+		this.numEjemplares = numEjemplares;
+		this.portada = portada;
+		this.presentacion = presentacion;
+		this.precio = precio;
+		
+	}
 
-    public int getIdLibro() {
-        return idLibro;
-    }
 
-    public void setIdLibro(int idLibro) {
-        this.idLibro = idLibro;
-    }
 
-    public String getTitulo() {
-        return titulo;
-    }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
 
-    public String getEditorial() {
-        return editorial;
-    }
 
-    public void setEditorial(String editorial) {
-        this.editorial = editorial;
-    }
+	public int getIdLibro() {
+		return idLibro;
+	}
 
-    public int getNumPaginas() {
-        return numPaginas;
-    }
+	public void setIdLibro(int idLibro) {
+		this.idLibro = idLibro;
+	}
 
-    public void setNumPaginas(int numPaginas) {
-        this.numPaginas = numPaginas;
-    }
+	public String getTitulo() {
+		return titulo;
+	}
 
-    public String getEdicion() {
-        return edicion;
-    }
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
-    public void setEdicion(String edicion) {
-        this.edicion = edicion;
-    }
+	public String getEditorial() {
+		return editorial;
+	}
 
-    public String getIdioma() {
-        return idioma;
-    }
+	public void setEditorial(String editorial) {
+		this.editorial = editorial;
+	}
 
-    public void setIdioma(String idioma) {
-        this.idioma = idioma;
-    }
+	public int getNumPaginas() {
+		return numPaginas;
+	}
 
-    public Date getFechaPublicacion() {
-        return fechaPublicacion;
-    }
+	public void setNumPaginas(int numPaginas) {
+		this.numPaginas = numPaginas;
+	}
 
-    public void setFechaPublicacion(Date fechaPublicacion) {
-        this.fechaPublicacion = fechaPublicacion;
-    }
+	public String getEdicion() {
+		return edicion;
+	}
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+	public void setEdicion(String edicion) {
+		this.edicion = edicion;
+	}
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+	public String getIdioma() {
+		return idioma;
+	}
 
-    public String getTipoPasta() {
-        return tipoPasta;
-    }
+	public void setIdioma(String idioma) {
+		this.idioma = idioma;
+	}
 
-    public void setTipoPasta(String tipoPasta) {
-        this.tipoPasta = tipoPasta;
-    }
+	public Date getFechaPublicacion() {
+		return fechaPublicacion;
+	}
 
-    public String getISBN() {
-        return ISBN;
-    }
+	public void setFechaPublicacion(Date fechaPublicacion) {
+		this.fechaPublicacion = fechaPublicacion;
+	}
 
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
-    }
+	public String getDescripcion() {
+		return descripcion;
+	}
 
-    public int getNumEjemplares() {
-        return numEjemplares;
-    }
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
-    public void setNumEjemplares(int numEjemplares) {
-        this.numEjemplares = numEjemplares;
-    }
+	public String getTipoPasta() {
+		return tipoPasta;
+	}
 
-    public String getPortada() {
-        return portada;
-    }
+	public void setTipoPasta(String tipoPasta) {
+		this.tipoPasta = tipoPasta;
+	}
 
-    public void setPortada(String portada) {
-        this.portada = portada;
-    }
+	public String getISBN() {
+		return ISBN;
+	}
 
-    public String getPresentacion() {
-        return presentacion;
-    }
+	public void setISBN(String iSBN) {
+		ISBN = iSBN;
+	}
 
-    public void setPresentacion(String presentacion) {
-        this.presentacion = presentacion;
-    }
+	public String getNumEjemplares() {
+		return numEjemplares;
+	}
 
-    public double getPrecio() {
-        return precio;
-    }
+	public void setNumEjemplares(String numEjemplares) {
+		this.numEjemplares = numEjemplares;
+	}
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
+	public String getPortada() {
+		return portada;
+	}
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
+	public void setPortada(String portada) {
+		this.portada = portada;
+	}
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
+	public String getPresentacion() {
+		return presentacion;
+	}
 
-    public Autor getAutor() {
-        return autor;
-    }
+	public void setPresentacion(String presentacion) {
+		this.presentacion = presentacion;
+	}
 
-    public void setAutor(Autor autor) {
-        this.autor = autor;
-    }
+	public Double getPrecio() {
+		return precio;
+	}
 
-    @Override
-    public String toString() {
-        return "Libro [idLibro=" + idLibro + ", titulo=" + titulo + ", editorial=" + editorial + ", numPaginas="
-                + numPaginas + ", edicion=" + edicion + ", idioma=" + idioma + ", descripcion=" + descripcion
-                + ", tipoPasta=" + tipoPasta + ", ISBN=" + ISBN + ", numEjemplares=" + numEjemplares + ", portada="
-                + portada + ", presentacion=" + presentacion + ", precio=" + precio + ", categoria=" + categoria
-                + ", autor=" + autor + "]";
-    }
+	public void setPrecio(Double precio) {
+		this.precio = precio;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public Autor getAutor() {
+		return autor;
+	}
+
+	public void setAutor(Autor autor) {
+		this.autor = autor;
+	}
+
+	public String toString() {
+		return "Libro [idLibro=" + idLibro + ", titulo=" + titulo + ", editorial=" + editorial + ", edicion=" + edicion
+				+ ", idioma=" + idioma + ", descripcion=" + descripcion + ", tipoPasta=" + tipoPasta + ", ISBN=" + ISBN
+				+ ", numEjemplares=" + numEjemplares + ", portada=" + portada + ", presentacion=" + presentacion
+				+ ", precio=" + precio + ", categoria=" + categoria + ", autor=" + autor + "]";
+	}
+	
+	
+	
+
 }

@@ -25,71 +25,77 @@ public class LibroServiceImpl implements LibroService {
     @Autowired
     private AutorDAO autorDAO;
 
-    @Override
     public List<Libro> findAll() {
         return libroDAO.findAll();
     }
 
-    @Override
     public Libro findOne(int id) {
         return libroDAO.findOne(id);
     }
 
-    @Override
     public void add(Libro libro) {
         Autor autor = autorDAO.findOne(libro.getAutor().getIdAutor());
         Categoria categoria = categoriaDAO.findOne(libro.getCategoria().getIdCategoria());
 
         if (autor != null && categoria != null) {
+            libro.setAutor(autor);
+            libro.setCategoria(categoria);
             libroDAO.add(libro);
         }
     }
 
-    @Override
-    public void update(Libro libro) {
+    public void up(Libro libro) {
         Autor autor = autorDAO.findOne(libro.getAutor().getIdAutor());
         Categoria categoria = categoriaDAO.findOne(libro.getCategoria().getIdCategoria());
 
         if (autor != null && categoria != null) {
-            libroDAO.update(libro);
+            libro.setAutor(autor);
+            libro.setCategoria(categoria);
+            libroDAO.up(libro);
         }
     }
 
-    @Override
-    public void delete(int id) {
-        libroDAO.delete(id);
+    public void del(int id) {
+        libroDAO.del(id);
     }
 
-    @Override
     public List<Libro> findAll(String busqueda) {
         return libroDAO.findAll(busqueda);
     }
 
-    @Override
     public void add(int idLibro, String titulo, String editorial, int numPaginas, String edicion, String idioma,
-                    Date fechaPublicacion, String descripcion, String tipoPasta, String ISBN, int numEjemplares,
-                    String portada, String presentacion, double precio, int idAutor, int idCategoria) {
+            Date fechaPublicacion, String descripcion, String tipoPasta, String iSBN, String numEjemplares,
+            String portada, String presentacion, Double precio, int idCategoria, int idAutor) {
+
         Categoria categoria = categoriaDAO.findOne(idCategoria);
         Autor autor = autorDAO.findOne(idAutor);
 
-        Libro libro = new Libro(idLibro, titulo, editorial, numPaginas, edicion, idioma, fechaPublicacion,
-                                descripcion, tipoPasta, ISBN, numEjemplares, portada, presentacion, precio,
-                                categoria, autor);
-
-        libroDAO.add(libro);
+        if (categoria != null && autor != null) {
+            Libro libro = new Libro(idLibro, titulo, editorial, numPaginas, edicion, idioma, fechaPublicacion,
+                    descripcion, tipoPasta, iSBN, numEjemplares, portada, presentacion, precio);
+            libro.setCategoria(categoria);
+            libro.setAutor(autor);
+            libroDAO.add(libro);
+        }
     }
 
-    @Override
     public void up(int idLibro, String titulo, String editorial, int numPaginas, String edicion, String idioma,
-                    Date fechaPublicacion, String descripcion, String tipoPasta, String ISBN, int numEjemplares,
-                    String portada, String presentacion, double precio, int idAutor, int idCategoria) {
+            Date fechaPublicacion, String descripcion, String tipoPasta, String iSBN, String numEjemplares,
+            String portada, String presentacion, Double precio, int idCategoria, int idAutor) {
+
         Categoria categoria = categoriaDAO.findOne(idCategoria);
         Autor autor = autorDAO.findOne(idAutor);
 
-        Libro libro = new Libro(idLibro, titulo, editorial, numPaginas, edicion, idioma, fechaPublicacion,
-                                descripcion, tipoPasta, ISBN, numEjemplares, portada, presentacion, precio,
-                                categoria, autor);
-
-        libroDAO.update(libro);
+        if (categoria != null && autor != null) {
+            Libro libro = new Libro(idLibro, titulo, editorial, numPaginas, edicion, idioma, fechaPublicacion,
+                    descripcion, tipoPasta, iSBN, numEjemplares, portada, presentacion, precio);
+            libro.setCategoria(categoria);
+            libro.setAutor(autor);
+            libroDAO.up(libro);
+        }
     }
+
+    // Otros métodos de la interfaz que no necesitan implementación aquí
+
+    // ...
 }
